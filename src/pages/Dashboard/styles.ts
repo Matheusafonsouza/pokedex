@@ -50,6 +50,13 @@ export const Content = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
 `;
 
 export const PokemonItem = styled.div`
