@@ -1,10 +1,32 @@
 import React from 'react';
-import { Container } from './styles';
+import { Container, Sidebar, Category } from './styles';
 
 const Dashboard: React.FC = () => {
   return (
     <Container>
-      <h1>Dashboard</h1>
+      <Sidebar>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+        <Category>NORMAL</Category>
+      </Sidebar>
     </Container>
   );
 };
