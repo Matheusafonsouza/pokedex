@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface BarProps {
+  value: number;
+}
+
 export const Container = styled.div`
   height: 100vh;
   width: 100vw;
@@ -105,7 +109,7 @@ export const PokemonData = styled.div`
   flex-direction: column;
 `;
 
-export const PokemonDetail = styled.div`
+export const PokemonDetail = styled.div<BarProps>`
   display: flex;
   justify-content: space-around;
   color: grey;
@@ -123,7 +127,7 @@ export const PokemonDetail = styled.div`
 
     > div {
       height: 100%;
-      width: 50%;
+      width: ${props => (props.value * 100) / 300}%;
       background: green;
       border-radius: 6px;
     }

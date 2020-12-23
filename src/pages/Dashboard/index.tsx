@@ -133,7 +133,7 @@ const Dashboard: React.FC = () => {
             </Pokemon>
             <PokemonData>
               {pokemon.stats.map((pokemonStat: Stats) => (
-                <PokemonDetail>
+                <PokemonDetail value={pokemonStat.value}>
                   <span>{pokemonStat.name}</span>
                   <p>{pokemonStat.value}</p>
                   <div>
