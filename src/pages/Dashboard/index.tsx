@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import api from '../../services/api';
 import {
   Container,
   Sidebar,
@@ -12,11 +13,35 @@ import {
   PokemonDetail,
 } from './styles';
 
+interface Category {
+  name: string;
+  url: string;
+}
+
+interface CategoryResponse {
+  count: number;
+  results: Category[];
+}
+
 const Dashboard: React.FC = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    async function loadCategories() {
+      const response = await api.get<CategoryResponse>('type');
+
+      setCategories(response.data.results);
+    }
+
+    loadCategories();
+  }, []);
+
   return (
     <Container>
       <Sidebar>
-        <Category>NORMAL</Category>
+        {categories.map((category: Category) => (
+          <Category>{category.name}</Category>
+        ))}
       </Sidebar>
       <Content>
         <PokemonItem>
