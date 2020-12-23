@@ -4,6 +4,8 @@ export const Container = styled.div`
   height: 100vh;
   width: 100vw;
   background: #f5f4f4;
+
+  display: flex;
 `;
 
 export const Sidebar = styled.div`
@@ -41,5 +43,82 @@ export const Category = styled.button`
   &:hover {
     background-color: #c13f27;
     color: #f8f7f7;
+  }
+`;
+
+export const Content = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const PokemonItem = styled.div`
+  width: 100%;
+  height: 400px;
+  background: red;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
+
+export const Pokemon = styled.div`
+  height: 80%;
+  width: 35%;
+  background: blue;
+  border-radius: 30px;
+
+  img {
+    height: 50%;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const PokemonDescription = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  span {
+    font-size: 40px;
+  }
+
+  p {
+    font-size: 20px;
+  }
+`;
+
+export const PokemonTypes = styled.div``;
+
+export const PokemonData = styled.div`
+  width: 35%;
+
+  display: flex;
+  flex-direction: column;
+`;
+
+export const PokemonDetail = styled.div`
+  display: flex;
+  justify-content: space-around;
+
+  & + div {
+    margin-top: 10px;
+  }
+
+  > div {
+    width: 70%;
+    background: grey;
+    border-radius: 6px;
+
+    > div {
+      height: 100%;
+      width: 50%;
+      background: green;
+      border-radius: 6px;
+    }
   }
 `;
