@@ -94,10 +94,6 @@ export const PokemonDescription = styled.div`
   span {
     font-size: 40px;
   }
-
-  p {
-    font-size: 20px;
-  }
 `;
 
 export const PokemonTypes = styled.div``;
@@ -114,7 +110,7 @@ export const PokemonDetail = styled.div`
   justify-content: space-around;
   color: grey;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
 
   & + div {
     margin-top: 10px;

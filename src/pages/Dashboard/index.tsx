@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 import {
@@ -23,14 +24,44 @@ interface CategoryResponse {
   results: Category[];
 }
 
+interface Stats {
+  value: number;
+  name: string;
+}
+
 interface Pokemon {
   name: string;
   url: string;
+  types: string[];
+  stats: Stats[];
+  img_url: string;
 }
 
 interface PokemonResponse {
   count: number;
-  results: Category[];
+  results: Pokemon[];
+}
+
+interface StatItem {
+  base_stat: number;
+  stat: {
+    name: string;
+  };
+}
+
+interface TypeItem {
+  type: {
+    name: string;
+  };
+}
+
+interface SinglePokemonResponse {
+  name: string;
+  sprites: {
+    front_default: string;
+  };
+  types: TypeItem[];
+  stats: StatItem[];
 }
 
 const Dashboard: React.FC = () => {
@@ -47,8 +78,33 @@ const Dashboard: React.FC = () => {
         },
       });
 
+      const fixedPokemons = pokemonsResponse.data.results.map(
+        async (pokemon: Pokemon) => {
+          const { data } = await axios.get<SinglePokemonResponse>(pokemon.url);
+
+          const fixedPokemon: Pokemon = {
+            name: data.name,
+            url: pokemon.url,
+            img_url: data.sprites.front_default,
+            types: data.types.map((typeItem: TypeItem) => typeItem.type.name),
+            stats: data.stats.map((statsItem: StatItem) => {
+              const fixedStat: Stats = {
+                name: statsItem.stat.name,
+                value: statsItem.base_stat,
+              };
+
+              return fixedStat;
+            }),
+          };
+
+          return fixedPokemon;
+        },
+      );
+
+      const pokemonDataFixed = await Promise.all(fixedPokemons);
+
       setCategories(categoriesResponse.data.results);
-      setPokemons(pokemonsResponse.data.results);
+      setPokemons(pokemonDataFixed);
     }
 
     loadInformation();
@@ -65,66 +121,26 @@ const Dashboard: React.FC = () => {
         {pokemons.map((pokemon: Pokemon) => (
           <PokemonItem>
             <Pokemon>
-              <img
-                src="https://cdn.bulbagarden.net/upload/thumb/7/7e/006Charizard.png/1200px-006Charizard.png"
-                alt="pokemon"
-              />
+              <img src={pokemon.img_url} alt="pokemon" />
               <PokemonDescription>
                 <span>{pokemon.name}</span>
-                <p>Pokemon maneiro</p>
               </PokemonDescription>
               <PokemonTypes>
-                <span>Dragão</span>
-                <span>Fogo</span>
+                {pokemon.types.map((pokemonType: string) => (
+                  <span>{pokemonType}</span>
+                ))}
               </PokemonTypes>
             </Pokemon>
             <PokemonData>
-              <PokemonDetail>
-                <span>Speed</span>
-                <p>130</p>
-                <div>
-                  <div />
-                </div>
-              </PokemonDetail>
-              <PokemonDetail>
-                <span>Speed</span>
-                <p>130</p>
-                <div>
-                  <div />
-                </div>
-              </PokemonDetail>
-
-              <PokemonDetail>
-                <span>Speed</span>
-                <p>130</p>
-                <div>
-                  <div />
-                </div>
-              </PokemonDetail>
-
-              <PokemonDetail>
-                <span>Speed</span>
-                <p>130</p>
-                <div>
-                  <div />
-                </div>
-              </PokemonDetail>
-
-              <PokemonDetail>
-                <span>Speed</span>
-                <p>130</p>
-                <div>
-                  <div />
-                </div>
-              </PokemonDetail>
-
-              <PokemonDetail>
-                <span>Speed</span>
-                <p>130</p>
-                <div>
-                  <div />
-                </div>
-              </PokemonDetail>
+              {pokemon.stats.map((pokemonStat: Stats) => (
+                <PokemonDetail>
+                  <span>{pokemonStat.name}</span>
+                  <p>{pokemonStat.value}</p>
+                  <div>
+                    <div />
+                  </div>
+                </PokemonDetail>
+              ))}
             </PokemonData>
           </PokemonItem>
         ))}
