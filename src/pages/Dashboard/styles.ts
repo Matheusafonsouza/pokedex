@@ -55,7 +55,7 @@ export const Content = styled.div`
 export const PokemonItem = styled.div`
   width: 100%;
   height: 400px;
-  background: red;
+  background: transparent;
 
   display: flex;
   align-items: center;
@@ -65,8 +65,9 @@ export const PokemonItem = styled.div`
 export const Pokemon = styled.div`
   height: 80%;
   width: 35%;
-  background: blue;
+  background: #fff;
   border-radius: 30px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
   img {
     height: 50%;
@@ -95,7 +96,7 @@ export const PokemonDescription = styled.div`
 export const PokemonTypes = styled.div``;
 
 export const PokemonData = styled.div`
-  width: 35%;
+  width: 40%;
 
   display: flex;
   flex-direction: column;
@@ -104,6 +105,9 @@ export const PokemonData = styled.div`
 export const PokemonDetail = styled.div`
   display: flex;
   justify-content: space-around;
+  color: grey;
+  font-weight: bold;
+  font-size: 20px;
 
   & + div {
     margin-top: 10px;
