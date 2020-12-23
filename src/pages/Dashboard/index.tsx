@@ -6,26 +6,6 @@ const Dashboard: React.FC = () => {
     <Container>
       <Sidebar>
         <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
-        <Category>NORMAL</Category>
       </Sidebar>
     </Container>
   );
