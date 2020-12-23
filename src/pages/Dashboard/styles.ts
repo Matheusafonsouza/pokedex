@@ -4,6 +4,22 @@ interface BarProps {
   value: number;
 }
 
+const getColorByValue = (value: number) => {
+  if (value <= 75) {
+    return '#DF4E49';
+  }
+  if (value <= 150) {
+    return '#F59D1F';
+  }
+  if (value <= 225) {
+    return '#F5C419';
+  }
+  if (value <= 300) {
+    return '#60A041';
+  }
+  return '#DF4E49';
+};
+
 export const Container = styled.div`
   height: 100vh;
   width: 100vw;
@@ -128,7 +144,7 @@ export const PokemonDetail = styled.div<BarProps>`
     > div {
       height: 100%;
       width: ${props => (props.value * 100) / 300}%;
-      background: green;
+      background: ${props => getColorByValue(props.value)};
       border-radius: 6px;
     }
   }
