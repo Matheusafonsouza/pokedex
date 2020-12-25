@@ -114,12 +114,12 @@ const Dashboard: React.FC = () => {
     <Container>
       <Sidebar>
         {categories.map((category: Category) => (
-          <Category>{category.name.toUpperCase()}</Category>
+          <Category key={category.name}>{category.name.toUpperCase()}</Category>
         ))}
       </Sidebar>
       <Content>
         {pokemons.map((pokemon: Pokemon) => (
-          <PokemonItem>
+          <PokemonItem key={pokemon.name}>
             <Pokemon>
               <img src={pokemon.img_url} alt="pokemon" />
               <PokemonDescription>
@@ -127,13 +127,13 @@ const Dashboard: React.FC = () => {
               </PokemonDescription>
               <PokemonTypes>
                 {pokemon.types.map((pokemonType: string) => (
-                  <span>{pokemonType}</span>
+                  <span key={pokemonType}>{pokemonType}</span>
                 ))}
               </PokemonTypes>
             </Pokemon>
             <PokemonData>
               {pokemon.stats.map((pokemonStat: Stats) => (
-                <PokemonDetail value={pokemonStat.value}>
+                <PokemonDetail key={pokemonStat.name} value={pokemonStat.value}>
                   <span>{pokemonStat.name}</span>
                   <p>{pokemonStat.value}</p>
                   <div>
