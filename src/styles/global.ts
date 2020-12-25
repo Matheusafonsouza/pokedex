@@ -8,6 +8,11 @@ export default createGlobalStyle`
     outline: 0;
   }
 
+  body, input, button {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+  }
+
   button {
     cursor: pointer;
   }

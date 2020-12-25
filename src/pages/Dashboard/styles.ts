@@ -51,7 +51,6 @@ export const Category = styled.button<CategoryProps>`
   border-radius: 5px;
   border: 0;
   color: ${props => getCategoryColor(props.categoryType)};
-  font-weight: bold;
 
   transition: background-color 0.2s;
 
@@ -111,7 +110,13 @@ export const PokemonDescription = styled.div`
   }
 `;
 
-export const PokemonTypes = styled.div``;
+export const PokemonTypes = styled.div`
+  span + span {
+    margin-left: 5px;
+  }
+
+  font-weight: 400;
+`;
 
 export const PokemonData = styled.div`
   width: 40%;
@@ -122,10 +127,23 @@ export const PokemonData = styled.div`
 
 export const PokemonDetail = styled.div<BarProps>`
   display: flex;
-  justify-content: space-around;
-  color: grey;
+  justify-content: flex-end;
   font-weight: bold;
   font-size: 15px;
+
+  span {
+    color: #66625c;
+    font-weight: 400;
+    margin-right: 10px;
+    text-align: start;
+    white-space: nowrap;
+  }
+
+  p {
+    color: #000;
+    font-weight: 300;
+    margin-right: 10px;
+  }
 
   & + div {
     margin-top: 10px;
@@ -133,14 +151,14 @@ export const PokemonDetail = styled.div<BarProps>`
 
   > div {
     width: 70%;
-    background: grey;
-    border-radius: 6px;
+    background: #66625c;
+    border-radius: 3px;
 
     > div {
       height: 100%;
       width: ${props => (props.value * 100) / 300}%;
       background: ${props => getColorByValue(props.value)};
-      border-radius: 6px;
+      border-radius: 3px;
     }
   }
 `;
