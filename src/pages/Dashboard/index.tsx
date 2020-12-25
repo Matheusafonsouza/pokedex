@@ -129,7 +129,9 @@ const Dashboard: React.FC = () => {
     <Container>
       <Sidebar>
         {categories.map((category: Category) => (
-          <Category key={category.name}>{category.name.toUpperCase()}</Category>
+          <Category key={category.name} categoryType={category.name}>
+            {category.name.toUpperCase()}
+          </Category>
         ))}
       </Sidebar>
       <Content>
