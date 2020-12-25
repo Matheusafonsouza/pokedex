@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import getCategoryColor from '../../utils/getCategoryColor';
+import getItemColor from '../../utils/getItemColor';
+import getColorByValue from '../../utils/getColorByValue';
 
 interface BarProps {
   value: number;
@@ -11,96 +14,6 @@ interface PokemonItemProps {
 interface CategoryProps {
   categoryType: string;
 }
-
-const getColorByValue = (value: number) => {
-  if (value <= 75) {
-    return '#DF4E49';
-  }
-  if (value <= 150) {
-    return '#F59D1F';
-  }
-  if (value <= 225) {
-    return '#F5C419';
-  }
-  if (value <= 300) {
-    return '#60A041';
-  }
-  return '#DF4E49';
-};
-
-const getItemColor = (color: string) => {
-  switch (color) {
-    case 'black':
-      return '#e4e4e4';
-    case 'blue':
-      return '#7d9cf0';
-    case 'brown':
-      return '#e3bf7c';
-    case 'gray':
-      return '#809da8';
-    case 'green':
-      return '#7ccb65';
-    case 'pink':
-      return '#eb5e74';
-    case 'purple':
-      return '#8774a8';
-    case 'red':
-      return '#c13f27';
-    case 'white':
-      return '#fff';
-    case 'yellow':
-      return '#f6c729';
-    default:
-      return '#fff';
-  }
-};
-
-const getTypeColor = (type: string) => {
-  switch (type) {
-    case 'normal':
-      return '#e4e4e4';
-    case 'fighting':
-      return '#c13f27';
-    case 'flying':
-      return '#a4a7f8';
-    case 'poison':
-      return '#8774a8';
-    case 'ground':
-      return '#ddaf58';
-    case 'rock':
-      return '#b79f35';
-    case 'bug':
-      return '#acc24d';
-    case 'ghost':
-      return '#b4a8c9';
-    case 'steel':
-      return '#85a1ab';
-    case 'fire':
-      return '#f3b88e';
-    case 'water':
-      return '#8da7f1';
-    case 'grass':
-      return '#68c644';
-    case 'electric':
-      return '#c8a55f';
-    case 'psychic':
-      return '#eb5c7a';
-    case 'ice':
-      return '#93d7d3';
-    case 'dragon':
-      return '#7272f7';
-    case 'dark':
-      return '#686868';
-    case 'fairy':
-      return '#E251FF';
-    case 'unknown':
-      return '#5A4D11';
-    case 'shadow':
-      return '#313131';
-    default:
-      return '#fff';
-  }
-};
 
 export const Container = styled.div`
   height: 100vh;
@@ -137,13 +50,13 @@ export const Category = styled.button<CategoryProps>`
   margin-bottom: 10px;
   border-radius: 5px;
   border: 0;
-  color: ${props => getTypeColor(props.categoryType)};
+  color: ${props => getCategoryColor(props.categoryType)};
   font-weight: bold;
 
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: ${props => getTypeColor(props.categoryType)};
+    background-color: ${props => getCategoryColor(props.categoryType)};
     color: #f8f7f7;
   }
 `;
