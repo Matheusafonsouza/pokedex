@@ -1,19 +1,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+import { Container } from './styles';
+
 const loadingContainer = {
-  width: '2rem',
-  height: '2rem',
+  width: '10%',
+  height: '10%',
   display: 'flex',
   justifyContent: 'space-around',
 };
 
 const loadingCircle = {
   display: 'block',
-  width: '0.5rem',
-  height: '0.5rem',
-  backgroundColor: 'black',
-  borderRadius: '0.25rem',
+  width: '30px',
+  height: '30px',
+  backgroundColor: '#f6c729',
+  borderRadius: '50%',
 };
 
 const loadingContainerVariants = {
@@ -46,28 +48,30 @@ const loadingCircleTransition = {
 
 const Loading: React.FC = () => {
   return (
-    <motion.div
-      style={loadingContainer}
-      variants={loadingContainerVariants}
-      initial="start"
-      animate="end"
-    >
-      <motion.span
-        style={loadingCircle}
-        variants={loadingCircleVariants}
-        transition={loadingCircleTransition}
-      />
-      <motion.span
-        style={loadingCircle}
-        variants={loadingCircleVariants}
-        transition={loadingCircleTransition}
-      />
-      <motion.span
-        style={loadingCircle}
-        variants={loadingCircleVariants}
-        transition={loadingCircleTransition}
-      />
-    </motion.div>
+    <Container>
+      <motion.div
+        style={loadingContainer}
+        variants={loadingContainerVariants}
+        initial="start"
+        animate="end"
+      >
+        <motion.span
+          style={loadingCircle}
+          variants={loadingCircleVariants}
+          transition={loadingCircleTransition}
+        />
+        <motion.span
+          style={loadingCircle}
+          variants={loadingCircleVariants}
+          transition={loadingCircleTransition}
+        />
+        <motion.span
+          style={loadingCircle}
+          variants={loadingCircleVariants}
+          transition={loadingCircleTransition}
+        />
+      </motion.div>
+    </Container>
   );
 };
 
