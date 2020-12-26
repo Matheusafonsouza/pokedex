@@ -40,6 +40,7 @@ export const Sidebar = styled.div`
 
 export const Category = styled.button<CategoryProps>`
   height: 40px;
+  min-height: 40px;
   width: 100%;
   background: #f8f7f7;
   margin-bottom: 10px;
