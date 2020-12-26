@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
+import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 import {
   Container,
   Sidebar,
@@ -86,7 +87,7 @@ const Dashboard: React.FC = () => {
           const { data } = await axios.get<SinglePokemonResponse>(pokemon.url);
 
           const fixedPokemon: Pokemon = {
-            name: data.name,
+            name: capitalizeFirstLetter(data.name),
             url: pokemon.url,
             img_url: data.sprites.front_default,
             types: data.types.map((typeItem: TypeItem) => typeItem.type.name),
