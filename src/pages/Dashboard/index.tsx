@@ -35,7 +35,6 @@ interface Pokemon {
   types: string[];
   stats: Stats[];
   img_url: string;
-  pokemonColor: string;
 }
 
 interface PokemonResponse {
@@ -68,12 +67,6 @@ interface SinglePokemonResponse {
   stats: StatItem[];
 }
 
-interface pokemonColorResponse {
-  color: {
-    name: string;
-  };
-}
-
 const Dashboard: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
@@ -92,13 +85,8 @@ const Dashboard: React.FC = () => {
         async (pokemon: Pokemon) => {
           const { data } = await axios.get<SinglePokemonResponse>(pokemon.url);
 
-          const { data: pokemonColor } = await axios.get<pokemonColorResponse>(
-            data.species.url,
-          );
-
           const fixedPokemon: Pokemon = {
             name: data.name,
-            pokemonColor: pokemonColor.color.name,
             url: pokemon.url,
             img_url: data.sprites.front_default,
             types: data.types.map((typeItem: TypeItem) => typeItem.type.name),
@@ -137,7 +125,7 @@ const Dashboard: React.FC = () => {
       <Content>
         {pokemons.map((pokemon: Pokemon) => (
           <PokemonItem key={pokemon.name}>
-            <Pokemon pokemonColor={pokemon.pokemonColor}>
+            <Pokemon>
               <img src={pokemon.img_url} alt="pokemon" />
               <PokemonDescription>
                 <span>{pokemon.name}</span>

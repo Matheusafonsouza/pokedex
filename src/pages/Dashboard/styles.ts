@@ -1,14 +1,9 @@
 import styled from 'styled-components';
 import getCategoryColor from '../../utils/getCategoryColor';
-import getItemColor from '../../utils/getItemColor';
 import getColorByValue from '../../utils/getColorByValue';
 
 interface BarProps {
   value: number;
-}
-
-interface PokemonItemProps {
-  pokemonColor: string;
 }
 
 interface CategoryProps {
@@ -83,10 +78,10 @@ export const PokemonItem = styled.div`
   justify-content: space-around;
 `;
 
-export const Pokemon = styled.div<PokemonItemProps>`
+export const Pokemon = styled.div`
   height: 80%;
   width: 35%;
-  background: ${props => getItemColor(props.pokemonColor)};
+  background: #fff;
   border-radius: 30px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
