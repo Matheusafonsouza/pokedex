@@ -36,6 +36,7 @@ interface SinglePokemonResponse {
 
 const Dashboard: React.FC = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [filteredPokemons, setFilteredPokemons] = useState<IPokemon[]>([]);
   const [pokemons, setPokemons] = useState<IPokemon[]>([]);
 
@@ -92,6 +93,7 @@ const Dashboard: React.FC = () => {
 
         setFilteredPokemons(fixedPokemons);
       }
+      setSelectedCategory(type);
     },
     [pokemons],
   );
@@ -102,6 +104,7 @@ const Dashboard: React.FC = () => {
         <Category
           categoryType="all"
           onClick={() => handleChangeCategory('all')}
+          selected={selectedCategory === 'all'}
         >
           ALL
         </Category>
@@ -110,6 +113,7 @@ const Dashboard: React.FC = () => {
             key={category.name}
             categoryType={category.name}
             onClick={() => handleChangeCategory(category.name)}
+            selected={selectedCategory === category.name}
           >
             {category.name.toUpperCase()}
           </Category>

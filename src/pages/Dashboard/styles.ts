@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import getCategoryColor from '../../utils/getCategoryColor';
 
 interface CategoryProps {
   categoryType: string;
+  selected: boolean;
 }
 
 export const Container = styled.div`
@@ -37,11 +38,20 @@ export const Category = styled.button<CategoryProps>`
   height: 40px;
   min-height: 40px;
   width: 100%;
-  background: #f8f7f7;
   margin-bottom: 10px;
   border-radius: 5px;
   border: 0;
-  color: ${props => getCategoryColor(props.categoryType)};
+
+  ${props =>
+    props.selected
+      ? css`
+          background-color: ${getCategoryColor(props.categoryType)};
+          color: #f8f7f7;
+        `
+      : css`
+          color: ${getCategoryColor(props.categoryType)};
+          background-color: #f8f7f7;
+        `}
 
   transition: background-color 0.2s;
 
