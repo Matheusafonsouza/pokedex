@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import api from '../../services/api';
 import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 import {
@@ -70,6 +70,7 @@ interface SinglePokemonResponse {
 
 const Dashboard: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [filteredPokemons, setFilteredPokemons] = useState<Pokemon[]>([]);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
@@ -114,17 +115,42 @@ const Dashboard: React.FC = () => {
     loadInformation();
   }, []);
 
+  const handleChangeCategory = useCallback(
+    (type: string) => {
+      if (type === 'all') {
+        setFilteredPokemons(pokemons);
+      } else {
+        const fixedPokemons = pokemons.filter((pokemon: Pokemon) =>
+          pokemon.types.includes(type),
+        );
+
+        setFilteredPokemons(fixedPokemons);
+      }
+    },
+    [pokemons],
+  );
+
   return (
     <Container>
       <Sidebar>
+        <Category
+          categoryType="all"
+          onClick={() => handleChangeCategory('all')}
+        >
+          ALL
+        </Category>
         {categories.map((category: Category) => (
-          <Category key={category.name} categoryType={category.name}>
+          <Category
+            key={category.name}
+            categoryType={category.name}
+            onClick={() => handleChangeCategory(category.name)}
+          >
             {category.name.toUpperCase()}
           </Category>
         ))}
       </Sidebar>
       <Content>
-        {pokemons.map((pokemon: Pokemon) => (
+        {filteredPokemons.map((pokemon: Pokemon) => (
           <PokemonItem key={pokemon.name}>
             <Pokemon>
               <img src={pokemon.img_url} alt="pokemon" />

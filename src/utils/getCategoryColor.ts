@@ -41,7 +41,7 @@ const getCategoryColor = (type: string): string => {
     case 'shadow':
       return '#313131';
     default:
-      return '#fff';
+      return '#313131';
   }
 };
 
