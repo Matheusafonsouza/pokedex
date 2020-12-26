@@ -148,7 +148,7 @@ export const PokemonDetail = styled.div<BarProps>`
     width: 70%;
     background: #66625c;
     border-radius: 3px;
-    min-width: 330px;
+    max-width: 330px;
 
     > div {
       height: 100%;
