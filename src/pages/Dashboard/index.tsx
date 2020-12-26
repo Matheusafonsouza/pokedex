@@ -2,58 +2,24 @@ import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import api from '../../services/api';
 import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
-import {
-  Container,
-  Sidebar,
-  Category,
-  Content,
-  Pokemon,
-  PokemonItem,
-  PokemonDescription,
-  PokemonTypes,
-  PokemonData,
-  PokemonDetail,
-} from './styles';
+import { Container, Sidebar, Category, Content } from './styles';
 
-interface Category {
-  name: string;
-  url: string;
-}
+import ICategory from '../../types/ICategory';
+import IPokemon from '../../types/IPokemon';
+import ITypeItem from '../../types/ITypeItem';
+import IStatItem from '../../types/IStatItem';
+import IStats from '../../types/IStats';
+
+import PokemonItem from '../../components/PokemonItem';
 
 interface CategoryResponse {
   count: number;
-  results: Category[];
-}
-
-interface Stats {
-  value: number;
-  name: string;
-}
-
-interface Pokemon {
-  name: string;
-  url: string;
-  types: string[];
-  stats: Stats[];
-  img_url: string;
+  results: ICategory[];
 }
 
 interface PokemonResponse {
   count: number;
-  results: Pokemon[];
-}
-
-interface StatItem {
-  base_stat: number;
-  stat: {
-    name: string;
-  };
-}
-
-interface TypeItem {
-  type: {
-    name: string;
-  };
+  results: IPokemon[];
 }
 
 interface SinglePokemonResponse {
@@ -64,14 +30,14 @@ interface SinglePokemonResponse {
   species: {
     url: string;
   };
-  types: TypeItem[];
-  stats: StatItem[];
+  types: ITypeItem[];
+  stats: IStatItem[];
 }
 
 const Dashboard: React.FC = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [filteredPokemons, setFilteredPokemons] = useState<Pokemon[]>([]);
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [categories, setCategories] = useState<ICategory[]>([]);
+  const [filteredPokemons, setFilteredPokemons] = useState<IPokemon[]>([]);
+  const [pokemons, setPokemons] = useState<IPokemon[]>([]);
 
   useEffect(() => {
     async function loadInformation() {
@@ -84,16 +50,16 @@ const Dashboard: React.FC = () => {
       });
 
       const fixedPokemons = pokemonsResponse.data.results.map(
-        async (pokemon: Pokemon) => {
+        async (pokemon: IPokemon) => {
           const { data } = await axios.get<SinglePokemonResponse>(pokemon.url);
 
-          const fixedPokemon: Pokemon = {
+          const fixedPokemon: IPokemon = {
             name: capitalizeFirstLetter(data.name),
             url: pokemon.url,
             img_url: data.sprites.front_default,
-            types: data.types.map((typeItem: TypeItem) => typeItem.type.name),
-            stats: data.stats.map((statsItem: StatItem) => {
-              const fixedStat: Stats = {
+            types: data.types.map((typeItem: ITypeItem) => typeItem.type.name),
+            stats: data.stats.map((statsItem: IStatItem) => {
+              const fixedStat: IStats = {
                 name: statsItem.stat.name,
                 value: statsItem.base_stat,
               };
@@ -120,7 +86,7 @@ const Dashboard: React.FC = () => {
       if (type === 'all') {
         setFilteredPokemons(pokemons);
       } else {
-        const fixedPokemons = pokemons.filter((pokemon: Pokemon) =>
+        const fixedPokemons = pokemons.filter((pokemon: IPokemon) =>
           pokemon.types.includes(type),
         );
 
@@ -139,7 +105,7 @@ const Dashboard: React.FC = () => {
         >
           ALL
         </Category>
-        {categories.map((category: Category) => (
+        {categories.map((category: ICategory) => (
           <Category
             key={category.name}
             categoryType={category.name}
@@ -150,31 +116,8 @@ const Dashboard: React.FC = () => {
         ))}
       </Sidebar>
       <Content>
-        {filteredPokemons.map((pokemon: Pokemon) => (
-          <PokemonItem key={pokemon.name}>
-            <Pokemon>
-              <img src={pokemon.img_url} alt="pokemon" />
-              <PokemonDescription>
-                <span>{pokemon.name}</span>
-              </PokemonDescription>
-              <PokemonTypes>
-                {pokemon.types.map((pokemonType: string) => (
-                  <span key={pokemonType}>{pokemonType}</span>
-                ))}
-              </PokemonTypes>
-            </Pokemon>
-            <PokemonData>
-              {pokemon.stats.map((pokemonStat: Stats) => (
-                <PokemonDetail key={pokemonStat.name} value={pokemonStat.value}>
-                  <span>{pokemonStat.name}</span>
-                  <p>{pokemonStat.value}</p>
-                  <div>
-                    <div />
-                  </div>
-                </PokemonDetail>
-              ))}
-            </PokemonData>
-          </PokemonItem>
+        {filteredPokemons.map((pokemon: IPokemon) => (
+          <PokemonItem key={pokemon.name} pokemon={pokemon} />
         ))}
       </Content>
     </Container>
