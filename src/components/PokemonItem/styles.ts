@@ -13,6 +13,10 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
 export const Pokemon = styled.div`
@@ -30,6 +34,11 @@ export const Pokemon = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 700px) {
+    width: 80%;
+    margin: 20px 0;
+  }
 `;
 
 export const PokemonDescription = styled.div`
@@ -55,6 +64,11 @@ export const PokemonData = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 700px) {
+    margin-bottom: 30px;
+    width: 80%;
+  }
 `;
 
 export const PokemonDetail = styled.div<BarProps>`
