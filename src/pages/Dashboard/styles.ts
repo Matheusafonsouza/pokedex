@@ -16,7 +16,7 @@ export const Container = styled.div`
 
 export const Sidebar = styled.div`
   height: 100%;
-  width: 8%;
+  width: 100px;
   background: #fff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
@@ -31,6 +31,10 @@ export const Sidebar = styled.div`
   &::-webkit-scrollbar {
     width: 0px;
     background: transparent;
+  }
+
+  @media (max-width: 700px) {
+    width: 80px;
   }
 `;
 
